@@ -1,0 +1,37 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{% static 'region/style.css' %}">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Region Dakhla</title>
+</head>
+<body>
+    <h1>Hi
+        ! you are in Dakhla</h1>
+    
+    <img src ="{% static 'region/insea_picture.png' %}"/>   
+    <img src ="{% static 'region/hcp.jpg' %}"/>
+    <h3>Region Eddakhla-oued eddahab</h3>
+    <hr>
+    <form action= "" method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+        <input type="submit" value="Submit">
+    </form>
+    <hr>
+    <h3>Exporter le fichier excel</h3>
+    <hr>
+    <li>
+        <a href="{% url 'export_excel' %}" >Cliquer ici pour exporter le fichier</a>
+    </li>
+    <hr>
+    <li>
+        <a href="{% url 'dashboard' %}" >Voir le DashBoard</a>
+    </li>
+
+</body>
+</html>
