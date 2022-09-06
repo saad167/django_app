@@ -25,6 +25,11 @@ data = pd.DataFrame(data_value,columns=["year","population","nb_lits_touristique
     "activity","nb_medecin","nuitees_touristiques", "nb_eleves_primaire","nb_eleves_college","nb_eleves_lycee"])
 
 
+data.sort_values(by=["year"],inplace=True)
+
+med_par_pop=[list(data["population"].values)[i]/list(data["nb_medecin"].values)[i] for i in range(len(data))]
+data["pop_pour_UN_med"]=med_par_pop
+
 years_string = [str(year) for year in data["year"]]
 colors = {
     'background': '#363b56'
@@ -235,7 +240,7 @@ def update_graph_chomage(input_value):
                     mode='lines+markers', line_color="orange",
                     name=input_value))
     fig.update_layout(
-        title="Variation du pourcentage du "+input_value+" entre 2013 et 2020",
+        title="Variation du pourcentage du "+input_value+" entre "+str(np.min(data["year"]))+" et "+str(np.max(data["year"])),
         plot_bgcolor='#363b56',
         font_color='#FFFFFF',
         paper_bgcolor='#464C68',
@@ -257,7 +262,7 @@ def update_graph_touris(input_value):
     fig = go.Figure()
     fig.add_trace(go.Bar(x=data["year"], y=data[input_radio],marker_color='yellow',name=input_value))
     fig.update_layout(
-        title="Variation du pourcentage du "+input_value+" entre 2013 et 2020",
+        title="Variation du pourcentage du "+input_value+" entre "+str(np.min(data["year"]))+" et "+str(np.max(data["year"])),
         plot_bgcolor='#363b56',
         font_color='#FFFFFF',
         paper_bgcolor='#464C68',

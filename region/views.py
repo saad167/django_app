@@ -23,7 +23,7 @@ def index(request):
 
 def export_excel(request):
     response = HttpResponse(content_type='application/ms-excel')
-    response['Content-Disposition'] = 'attachment; filename="test.csv"'
+    response['Content-Disposition'] = 'attachment; filename="test.xlsx"'
     wb = xlwt.Workbook(encoding='utf-8')
     ws = wb.add_sheet('region')
 
