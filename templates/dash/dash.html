@@ -1,31 +1,3 @@
-{% load static %}
+{%load plotly_dash%}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <link rel="stylesheet" href="{% static 'plot/style.css' %}">
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    {{ target_plot1|safe }}
-<hr>
-<label style="color : white;" >activity : </label>
-<br>
-<br>
-
-<select name="activity">
-  <option value="activity">activity</option>
-  <option value="chomage">chomage</option>
-</select>
-<br>
-<br>
-<input type="submit" value="Submit">
-<hr>
-    
-    {{ target_plot2|safe }}
-    
-</body>
-</html>
+{%plotly_app name="SimpleExample"%}

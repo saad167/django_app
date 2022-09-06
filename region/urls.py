@@ -2,9 +2,10 @@ from django.urls import path
 
 from . import views
 
+from . import plot
 urlpatterns = [
     path('', views.index),
     #path('<int:id>/add', views.add, name='add'),
     path('excel', views.export_excel, name='export_excel'),
-    path('dashboard', views.plot, name='dashboard'),
+    path('dash', views.plot, name='dashboard'),
 ]

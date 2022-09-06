@@ -3,8 +3,7 @@ from django.http import HttpResponseRedirect , HttpResponse
 from .forms import RegionForm
 import xlwt
 from .models import Region
-from .plot import plotly_plot
-
+from . import plot
 
 def index(request):
 
@@ -58,24 +57,7 @@ def export_excel(request):
 
 
 
-#def root(request,id):
-
-#    context = {"id":id}
-#    return render(request,"index.html",context=context)
 
 def plot(request):
-
-
-
-    #Plotly visualizations
-    target_plot1 , target_plot2 = plotly_plot("chomage")
-    ...
-    #Return context to home page view
-    context = {'target_plot1': target_plot1,
-        'target_plot2': target_plot2 }
-        
-    # Render the HTML template index.html with the data in the context variable.
-    return render(
-        request,
-        'dash/dash.html',
-        context= context)
+    
+    return render( request, "dash/dash.html")
