@@ -9,7 +9,7 @@ import dash
 import numpy as np
 
 
-
+np.set_printoptions(precision = 3)
 rows = Region.objects.all().values_list("year","population","nb_lits_touristiques","chomage",
     "activity","nb_medecin","nuitees_touristiques", "nb_eleves_primaire","nb_eleves_college","nb_eleves_lycee")
 
@@ -26,6 +26,7 @@ data = pd.DataFrame(data_value,columns=["year","population","nb_lits_touristique
 
 
 data.sort_values(by=["year"],inplace=True)
+year_test = ["16","17","18","19","20"]
 
 med_par_pop=[list(data["population"].values)[i]/list(data["nb_medecin"].values)[i] for i in range(len(data))]
 data["pop_pour_UN_med"]=med_par_pop
@@ -53,14 +54,18 @@ app.layout = html.Div(style={'backgroundColor': colors['background']},children=[
         ]),
         html.Div([
             html.Div([
+            
             dcc.Slider(
                 id="slider",
-                min=np.min(data["year"]),
-                max=np.max(data["year"]),
-                value=np.min(data["year"]),
-                marks={i:years_string[i] for i in range(len(years_string))},
-                included=False,
-                step=None)
+                min=np.min(data["year"]),max=np.max(data["year"]),step= 1, value=np.min(data["year"]), marks=None,
+            tooltip={"placement": "bottom", "always_visible": True})
+            #    id="slider",
+            #    min=2016,
+            #    max=2020,
+            #    value=2016,
+                
+            #    marks={data.values[i,0]:year_test[i] for i in range(len(year_test))},
+            #   included=False)
         ]),
         html.Div([
             html.H1("                                                              ")
@@ -274,5 +279,4 @@ def update_graph_touris(input_value):
 
 
 
-if __name__ == '__main__':
-    app.run_server(debug=True)
+
