@@ -2,3 +2,7 @@ body{
     background-color: lightblue;
 
 }
+
+.container {
+    position: relative;
+  }

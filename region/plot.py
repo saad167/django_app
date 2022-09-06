@@ -9,7 +9,6 @@ import dash
 import numpy as np
 
 
-np.set_printoptions(precision = 3)
 rows = Region.objects.all().values_list("year","population","nb_lits_touristiques","chomage",
     "activity","nb_medecin","nuitees_touristiques", "nb_eleves_primaire","nb_eleves_college","nb_eleves_lycee")
 
@@ -26,19 +25,21 @@ data = pd.DataFrame(data_value,columns=["year","population","nb_lits_touristique
 
 
 data.sort_values(by=["year"],inplace=True)
-year_test = ["16","17","18","19","20"]
+
 
 med_par_pop=[list(data["population"].values)[i]/list(data["nb_medecin"].values)[i] for i in range(len(data))]
 data["pop_pour_UN_med"]=med_par_pop
 
 years_string = [str(year) for year in data["year"]]
 colors = {
-    'background': '#363b56'
+    'background': '#0E0E0E'
 }
 
 app = DjangoDash('SimpleExample')   # replaces dash.Dash
 
-app.layout = html.Div(style={'backgroundColor': colors['background']},children=[
+app.layout = html.Div(style={'backgroundColor': colors['background'],
+                            "height": "100%" ,
+                        },children=[
     html.Div([
         html.Div([
             html.H1("Panorama économique de la région DAKHLA-OUAD DAHAB", style={'color': '#DE2342','textAlign':'center','font-weight': 'bold'}),
@@ -245,10 +246,11 @@ def update_graph_chomage(input_value):
                     mode='lines+markers', line_color="orange",
                     name=input_value))
     fig.update_layout(
+           xaxis = dict(dtick = 1),
         title="Variation du pourcentage du "+input_value+" entre "+str(np.min(data["year"]))+" et "+str(np.max(data["year"])),
-        plot_bgcolor='#363b56',
+        plot_bgcolor='#0E0E0E',
         font_color='#FFFFFF',
-        paper_bgcolor='#464C68',
+        paper_bgcolor='#0E0E0E',
         legend=dict(
             bgcolor='#363b56',
             bordercolor='#363b56'
@@ -268,9 +270,9 @@ def update_graph_touris(input_value):
     fig.add_trace(go.Bar(x=data["year"], y=data[input_radio],marker_color='yellow',name=input_value))
     fig.update_layout(
         title="Variation du pourcentage du "+input_value+" entre "+str(np.min(data["year"]))+" et "+str(np.max(data["year"])),
-        plot_bgcolor='#363b56',
+        plot_bgcolor='#0E0E0E',
         font_color='#FFFFFF',
-        paper_bgcolor='#464C68',
+        paper_bgcolor='#0E0E0E',
         legend=dict(
             bgcolor='#363b56',
             bordercolor='#363b56'
